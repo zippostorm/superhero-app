@@ -6,11 +6,14 @@ export const getAllSuperheroes = async (req, res) => {
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const limit = parseInt(req.query.limit) || 5;
+
     const superheroes = await Superhero.find({})
-      .sort({ createdAt: -1 })
+      .sort({ updatedAt: -1 })
       .limit(limit)
       .skip(startIndex);
-    res.status(200).json({ success: true, superheroes });
+
+    const totalSuperheroes = await Superhero.countDocuments();
+    res.status(200).json({ success: true, superheroes, totalSuperheroes });
   } catch (error) {
     res.status(500).json({
       success: false,

@@ -1,20 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useSuperheroStore } from "../store/useSuperheroStore";
 import { BadgeAlert } from "lucide-react";
 import SuperheroCard from "../components/SuperheroCard";
 
 const HomePage = () => {
-  const { getAllSuperheroes, superheroes, loading, error } =
+  const { getAllSuperheroes, superheroes, loading, error, showMore } =
     useSuperheroStore();
+
   const location = useLocation();
 
-  useEffect(() => {
+  const handleShowMore = async () => {
     const urlParams = new URLSearchParams(location.search);
+    const startIndex = parseInt(urlParams.get("startIndex")) || 0;
+    const limit = parseInt(urlParams.get("limit")) || 5;
+    urlParams.set("startIndex", startIndex + limit);
     const searchQuery = urlParams.toString();
+    getAllSuperheroes(searchQuery, true);
+  };
 
-    getAllSuperheroes(searchQuery);
-  }, [location.search]);
+  useEffect(() => {
+    getAllSuperheroes();
+  }, [getAllSuperheroes]);
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
       {error && <div className="alert alert-error mb-8">{error}</div>}
@@ -38,11 +45,23 @@ const HomePage = () => {
           <div className="loading loading-spinner loading-lg" />
         </div>
       ) : (
-        <div className="flex flex-wrap justify-center gap-8">
-          {superheroes.map((superhero) => (
-            <SuperheroCard key={superhero._id} superhero={superhero} />
-          ))}
-        </div>
+        <>
+          <div className="flex flex-wrap justify-center gap-8">
+            {superheroes.map((superhero) => (
+              <SuperheroCard key={superhero._id} superhero={superhero} />
+            ))}
+          </div>
+          {showMore && (
+            <div className="flex justify-center mt-8">
+              <button
+                className="btn btn-primary w-[700px]"
+                onClick={handleShowMore}
+              >
+                Load more
+              </button>
+            </div>
+          )}
+        </>
       )}
     </main>
   );
