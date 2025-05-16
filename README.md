@@ -57,3 +57,27 @@ The application requires a .env file with environment variables like MONGODB_URI
 MongoDB (or the relevant database) is already running and accessible.
 
 npm run dev will concurrently start both backend and frontend development servers.
+
+<h1>Unit Tests Report</h1>
+
+Unit tests were written for the Superhero controllers to verify the core logic and functionality:
+
+![Demo App](/frontend/public/tests.jpg)
+
+```bash
+Verified fetching the list of superheroes along with the total count.
+
+Tested creating a superhero with mocked image upload using Cloudinary.
+
+Tested updating superhero data and saving changes to the database.
+
+Tested deleting a superhero’s image.
+
+Tested deleting a superhero from the database.
+
+Tested fetching a superhero by ID, including handling the case when the superhero is not found.
+
+The tests mock the database operations and external Cloudinary service, allowing them to run independently without a real database or network connection.
+```
+
+### _Result_: All tests passed successfully.

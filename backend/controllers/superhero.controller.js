@@ -13,6 +13,7 @@ export const getAllSuperheroes = async (req, res) => {
       .skip(startIndex);
 
     const totalSuperheroes = await Superhero.countDocuments();
+
     res.status(200).json({ success: true, superheroes, totalSuperheroes });
   } catch (error) {
     res.status(500).json({
