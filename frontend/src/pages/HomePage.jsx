@@ -5,8 +5,15 @@ import { BadgeAlert } from "lucide-react";
 import SuperheroCard from "../components/SuperheroCard";
 
 const HomePage = () => {
-  const { getAllSuperheroes, superheroes, loading, error, showMore } =
-    useSuperheroStore();
+  const {
+    getAllSuperheroes,
+    resetCurrentSuperhero,
+    currentSuperhero,
+    superheroes,
+    loading,
+    error,
+    showMore,
+  } = useSuperheroStore();
 
   const location = useLocation();
 
@@ -22,6 +29,10 @@ const HomePage = () => {
   useEffect(() => {
     getAllSuperheroes();
   }, [getAllSuperheroes]);
+
+  useEffect(() => {
+    resetCurrentSuperhero();
+  }, [resetCurrentSuperhero]);
   return (
     <main className="max-w-7xl mx-auto px-4 py-8">
       {error && <div className="alert alert-error mb-8">{error}</div>}

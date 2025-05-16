@@ -10,6 +10,8 @@ export const useSuperheroStore = create((set, get) => ({
   error: null,
   currentSuperhero: null,
 
+  resetCurrentSuperhero: () => set({ currentSuperhero: null }),
+
   addSuperhero: async (formData) => {
     set({ createLoading: true, error: null });
     try {
