@@ -77,7 +77,8 @@ Tested deleting a superhero from the database.
 
 Tested fetching a superhero by ID, including handling the case when the superhero is not found.
 
-The tests mock the database operations and external Cloudinary service, allowing them to run independently without a real database or network connection.
 ```
+
+The tests mock the database operations and external Cloudinary service, allowing them to run independently without a real database or network connection.
 
 ### _Result_: All tests passed successfully.
