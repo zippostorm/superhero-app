@@ -7,10 +7,11 @@ import {
   User,
   UserCheck,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useSuperheroStore } from "../store/useSuperheroStore";
 
 const AddSuperheroModal = () => {
-  const loading = false;
+  const { loading, addSuperhero } = useSuperheroStore();
   const [formData, setFormData] = useState({
     nickname: "",
     real_name: "",
@@ -19,7 +20,8 @@ const AddSuperheroModal = () => {
     catch_phrase: "",
     images: [],
   });
-  console.log(formData.images);
+
+  const fileInputRef = useRef(null);
 
   const resetFormData = () => {
     setFormData({
@@ -30,6 +32,10 @@ const AddSuperheroModal = () => {
       catch_phrase: "",
       images: [],
     });
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = null;
+    }
   };
 
   const handleImagesChange = (e) => {
@@ -54,6 +60,12 @@ const AddSuperheroModal = () => {
         console.error("Error reading files", err);
       });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await addSuperhero(formData);
+    resetFormData();
+  };
   return (
     <dialog id="add_product_modal" className="modal">
       <div className="modal-box">
@@ -66,7 +78,7 @@ const AddSuperheroModal = () => {
 
         <h3 className="font-bold text-xl mb-8">Add New Superhero</h3>
 
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid gap-6">
             <div className="form-control">
               <label className="label">
@@ -198,6 +210,7 @@ const AddSuperheroModal = () => {
                   className="file-input file-input-bordered w-full pl-10 focus:input-primary transition-colors duration-200"
                   accept="image/*"
                   onChange={handleImagesChange}
+                  ref={fileInputRef}
                 />
               </div>
             </div>
