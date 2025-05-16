@@ -1,7 +1,11 @@
 import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useSuperheroStore } from "../store/useSuperheroStore";
 
 const ImageSlider = ({ images, superheroId }) => {
+  const { deleteImage } = useSuperheroStore();
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!images || images.length === 0) return null;
@@ -22,6 +26,14 @@ const ImageSlider = ({ images, superheroId }) => {
 
   const handleDelete = async () => {
     console.log(images[currentIndex].public_id, superheroId);
+    if (images.length === 1) {
+      toast.error(
+        "Superhero must have at least one image. Please add another first."
+      );
+      return;
+    }
+
+    await deleteImage(images[currentIndex].public_id, superheroId);
   };
 
   return (

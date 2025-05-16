@@ -12,7 +12,7 @@ const SuperheroCard = ({ superhero }) => {
     >
       <figure className="relative h-[550px] w-[350px]">
         <img
-          src={superhero.images[0].secure_url}
+          src={superhero?.images[0]?.secure_url}
           alt={superhero.nickname}
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
