@@ -19,7 +19,7 @@ const SuperheroCard = ({ superhero }) => {
       </figure>
 
       <div className="card-body">
-        <h1 className="card-title text-5xl mx-auto font-semibold">
+        <h1 className="card-title text-5xl mx-auto text-center font-semibold">
           {superhero.nickname}
         </h1>
       </div>
