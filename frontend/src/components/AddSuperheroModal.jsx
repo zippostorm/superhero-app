@@ -11,7 +11,7 @@ import React, { useState, useRef } from "react";
 import { useSuperheroStore } from "../store/useSuperheroStore";
 
 const AddSuperheroModal = () => {
-  const { loading, addSuperhero } = useSuperheroStore();
+  const { createLoading, addSuperhero } = useSuperheroStore();
   const [formData, setFormData] = useState({
     nickname: "",
     real_name: "",
@@ -237,10 +237,10 @@ const AddSuperheroModal = () => {
                 !formData.superpowers ||
                 !formData.catch_phrase ||
                 formData.images.length === 0 ||
-                loading
+                createLoading
               }
             >
-              {loading ? (
+              {createLoading ? (
                 <span className="loading loading-spinner loading-sm" />
               ) : (
                 <>

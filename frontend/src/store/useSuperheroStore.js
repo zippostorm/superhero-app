@@ -5,12 +5,13 @@ import { toast } from "react-hot-toast";
 export const useSuperheroStore = create((set, get) => ({
   superheroes: [],
   loading: false,
+  createLoading: false,
   showMore: false,
   error: null,
   currentSuperhero: null,
 
   addSuperhero: async (formData) => {
-    set({ loading: true, error: null });
+    set({ createLoading: true, error: null });
     try {
       await axios.post(
         `${import.meta.env.VITE_API_URL}/api/superheroes`,
@@ -23,7 +24,7 @@ export const useSuperheroStore = create((set, get) => ({
       set({ error: error.message });
       toast.error("Error adding superhero");
     } finally {
-      set({ loading: false });
+      set({ createLoading: false });
     }
   },
 
