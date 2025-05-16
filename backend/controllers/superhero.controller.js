@@ -4,7 +4,12 @@ import { Superhero } from "../models/superhero.model.js";
 
 export const getAllSuperheroes = async (req, res) => {
   try {
-    const superheroes = await Superhero.find();
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 5;
+    const superheroes = await Superhero.find({})
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .skip(startIndex);
     res.status(200).json({ success: true, superheroes });
   } catch (error) {
     res.status(500).json({
@@ -73,6 +78,34 @@ export const createSuperhero = async (req, res) => {
   }
 };
 
+export const deleteSuperheroImage = async (req, res) => {
+  try {
+    const { public_id } = req.body;
+
+    const superhero = await Superhero.findById(req.params.id);
+    if (!superhero) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Superhero not found" });
+    }
+
+    await cloudinary.uploader.destroy(public_id);
+
+    superhero.images = superhero.images.filter(
+      (img) => img.public_id !== public_id
+    );
+
+    await superhero.save();
+
+    res.status(200).json({ success: true, message: "Image deleted" });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error in deleteSuperheroImage controller: " + error.message,
+    });
+  }
+};
+
 export const updateSuperhero = async (req, res) => {
   try {
     const {
@@ -81,6 +114,7 @@ export const updateSuperhero = async (req, res) => {
       origin_description,
       superpowers,
       catch_phrase,
+      newImages,
     } = req.body;
 
     const superhero = await Superhero.findById(req.params.id);
@@ -97,7 +131,20 @@ export const updateSuperhero = async (req, res) => {
     superhero.superpowers = superpowers || superhero.superpowers;
     superhero.catch_phrase = catch_phrase || superhero.catch_phrase;
 
+    if (newImages && newImages.length > 0) {
+      for (const img of newImages) {
+        const uploadRes = await cloudinary.uploader.upload(img, {
+          folder: "superheroes",
+        });
+        superhero.images.push({
+          secure_url: uploadRes.secure_url,
+          public_id: uploadRes.public_id,
+        });
+      }
+    }
+
     await superhero.save();
+
     res.status(200).json({ success: true, superhero });
   } catch (error) {
     res.status(500).json({
