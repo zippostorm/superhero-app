@@ -38,4 +38,18 @@ export const useSuperheroStore = create((set, get) => ({
       set({ loading: false });
     }
   },
+
+  getSuperheroById: async (id) => {
+    set({ loading: true, error: null });
+    try {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/superheroes/${id}`
+      );
+      set({ currentSuperhero: res.data.superhero });
+    } catch (error) {
+      set({ error: error.message });
+    } finally {
+      set({ loading: false });
+    }
+  },
 }));

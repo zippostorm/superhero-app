@@ -1,10 +1,14 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SuperheroCard = ({ superhero }) => {
+  const navigate = useNavigate();
   return (
     <div
       className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
-      onClick={() => console.log(superhero)}
+      onClick={() => {
+        navigate(`/superhero/${superhero._id}`);
+      }}
     >
       <figure className="relative h-[550px] w-[450px]">
         <img

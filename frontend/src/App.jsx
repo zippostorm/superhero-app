@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
+import SuperheroPage from "./pages/SuperheroPage";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/superhero/:id" element={<SuperheroPage />} />
       </Routes>
 
       <Toaster />
