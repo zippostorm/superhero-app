@@ -114,7 +114,7 @@ export const updateSuperhero = async (req, res) => {
       origin_description,
       superpowers,
       catch_phrase,
-      newImages,
+      images,
     } = req.body;
 
     const superhero = await Superhero.findById(req.params.id);
@@ -131,8 +131,8 @@ export const updateSuperhero = async (req, res) => {
     superhero.superpowers = superpowers || superhero.superpowers;
     superhero.catch_phrase = catch_phrase || superhero.catch_phrase;
 
-    if (newImages && newImages.length > 0) {
-      for (const img of newImages) {
+    if (images && images.length > 0) {
+      for (const img of images) {
         const uploadRes = await cloudinary.uploader.upload(img, {
           folder: "superheroes",
         });

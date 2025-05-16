@@ -1,9 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useResolvedPath } from "react-router-dom";
 import { PlusCircleIcon, ShieldIcon } from "lucide-react";
 import AddSuperheroModal from "./AddSuperheroModal";
 
 const Navbar = () => {
+  const { pathname } = useResolvedPath();
+  const isHomePage = pathname === "/";
   return (
     <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-content/10 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto">
@@ -23,18 +25,20 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-4">
-            <button
-              className="btn btn-primary"
-              onClick={() =>
-                document.getElementById("add_superhero_modal").showModal()
-              }
-            >
-              <PlusCircleIcon className="size-5 mr-2" />
-              Add Superhero
-            </button>
-            <AddSuperheroModal />
-          </div>
+          {isHomePage && (
+            <div className="flex items-center gap-4">
+              <button
+                className="btn btn-primary"
+                onClick={() =>
+                  document.getElementById("add_superhero_modal").showModal()
+                }
+              >
+                <PlusCircleIcon className="size-5 mr-2" />
+                Add Superhero
+              </button>
+              <AddSuperheroModal />
+            </div>
+          )}
         </div>
       </div>
     </div>

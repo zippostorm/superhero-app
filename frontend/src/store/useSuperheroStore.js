@@ -26,6 +26,23 @@ export const useSuperheroStore = create((set, get) => ({
     }
   },
 
+  editSuperhero: async (id, formData) => {
+    set({ loading: true, error: null });
+    try {
+      await axios.patch(
+        `${import.meta.env.VITE_API_URL}/api/superheroes/${id}`,
+        formData
+      );
+      toast.success("Superhero updated successfully");
+      await get().getSuperheroById(id);
+    } catch (error) {
+      set({ error: error.message });
+      toast.error("Error updating superhero");
+    } finally {
+      set({ loading: false });
+    }
+  },
+
   getAllSuperheroes: async (searchQuery) => {
     set({ loading: true, error: null });
     try {
