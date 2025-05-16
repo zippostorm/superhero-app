@@ -10,7 +10,7 @@ const SuperheroCard = ({ superhero }) => {
         navigate(`/superhero/${superhero._id}`);
       }}
     >
-      <figure className="relative h-[550px] w-[450px]">
+      <figure className="relative h-[550px] w-[350px]">
         <img
           src={superhero.images[0].secure_url}
           alt={superhero.nickname}

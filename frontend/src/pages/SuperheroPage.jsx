@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSuperheroStore } from "../store/useSuperheroStore";
 import { ArrowLeftIcon } from "lucide-react";
 
+import ImageSlider from "../components/ImageSlider";
+
 const SuperheroPage = () => {
   const { getSuperheroById, loading, currentSuperhero, error } =
     useSuperheroStore();
@@ -44,14 +46,13 @@ const SuperheroPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="rounded-lg overflow-hidden shadow-lg bg-base-100">
-          {currentSuperhero?.images?.map((img, index) => (
-            <img
-              key={index}
-              src={img.secure_url || img}
-              alt={`Image ${index + 1}`}
-              className="w-full h-auto object-cover mb-4"
-            />
-          ))}
+          <ImageSlider images={currentSuperhero?.images || []} />
+        </div>
+
+        <div className="card bg-base-100 shadow-lg">
+          <div className="card-body">
+            <h2 className="card-title text-2xl mb-6">Superhero Details:</h2>
+          </div>
         </div>
       </div>
     </div>
