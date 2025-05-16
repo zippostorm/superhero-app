@@ -37,7 +37,7 @@ const ImageSlider = ({ images, superheroId }) => {
   };
 
   return (
-    <div className="relative w-full h-[550px] overflow-hidden rounded-lg shadow-lg bg-base-100">
+    <div className="relative w-full h-[700px] overflow-hidden rounded-lg shadow-lg bg-base-100">
       <img
         src={images[currentIndex]?.secure_url || images[currentIndex]}
         alt={`Slide ${currentIndex + 1}`}

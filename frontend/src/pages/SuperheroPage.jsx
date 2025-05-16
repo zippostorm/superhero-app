@@ -61,7 +61,7 @@ const SuperheroPage = () => {
             <h2 className="card-title text-2xl mb-4">Details:</h2>
 
             <div className="flex flex-col h-full justify-between text-xl">
-              <div className="flex flex-col gap-8 mb-8">
+              <div className="flex flex-col gap-12 mb-8">
                 <span className="font-medium">
                   <span className="text-primary">Nickname: </span>
                   <span className="font-bold">
@@ -94,28 +94,63 @@ const SuperheroPage = () => {
                 </span>
               </div>
 
-              <button
-                className="btn btn-primary"
-                onClick={() =>
-                  document.getElementById("edit_superhero_modal").showModal()
-                }
-              >
-                <Pencil />
-                Edit
-              </button>
-              <EditSuperheroModal />
-              <button
-                className="btn btn-error"
-                onClick={() => {
-                  deleteSuperhero(currentSuperhero._id);
-                  setTimeout(() => {
-                    navigate("/");
-                  }, 1000);
-                }}
-              >
-                <Trash2 />
-                Delete
-              </button>
+              <div className="flex flex-col gap-5 justify-between">
+                <button
+                  className="btn btn-primary"
+                  onClick={() =>
+                    document.getElementById("edit_superhero_modal").showModal()
+                  }
+                >
+                  <Pencil />
+                  Edit
+                </button>
+                <EditSuperheroModal />
+                <button
+                  className="btn btn-error"
+                  onClick={() =>
+                    document.getElementById("confirm_delete_modal").showModal()
+                  }
+                >
+                  <Trash2 />
+                  Delete
+                </button>
+
+                <dialog id="confirm_delete_modal" className="modal">
+                  <div className="modal-box">
+                    <h3 className="font-bold text-lg">Are you sure?</h3>
+                    <p className="py-4">
+                      Do you really want to delete this superhero?
+                    </p>
+                    <div className="modal-action">
+                      <form method="dialog" className="flex gap-4">
+                        <button
+                          className="btn"
+                          onClick={() =>
+                            document
+                              .getElementById("confirm_delete_modal")
+                              .close()
+                          }
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="btn btn-error"
+                          onClick={() => {
+                            deleteSuperhero(currentSuperhero._id);
+                            setTimeout(() => navigate("/"), 1000);
+                          }}
+                        >
+                          Yes, delete
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <form method="dialog" className="modal-backdrop">
+                    <button>close</button>
+                  </form>
+                </dialog>
+              </div>
             </div>
           </div>
         </div>
