@@ -7,7 +7,7 @@ import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-600 to-black/90 text-white">
+    <div className="min-h-screen bg-base-200 transition-colors duration-300 overflow-hidden">
       <Navbar />
 
       <Routes>
