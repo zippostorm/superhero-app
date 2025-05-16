@@ -15,6 +15,7 @@ export const useSuperheroStore = create((set, get) => ({
         `${import.meta.env.VITE_API_URL}/api/superheroes`,
         formData
       );
+      await get().getAllSuperheroes();
       toast.success("Superhero added successfully");
       document.getElementById("add_product_modal").close();
     } catch (error) {

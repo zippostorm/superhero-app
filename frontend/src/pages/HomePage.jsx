@@ -9,7 +9,6 @@ const HomePage = () => {
     useSuperheroStore();
   const location = useLocation();
 
-  console.log(superheroes, "superheroes in homePage");
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchQuery = urlParams.toString();

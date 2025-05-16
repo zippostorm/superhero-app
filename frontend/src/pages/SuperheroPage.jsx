@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSuperheroStore } from "../store/useSuperheroStore";
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, Pencil } from "lucide-react";
 
 import ImageSlider from "../components/ImageSlider";
 
@@ -12,11 +12,9 @@ const SuperheroPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  console.log(currentSuperhero, "currentSuperhero");
-
   useEffect(() => {
     getSuperheroById(id);
-  }, [id]);
+  }, [id, getSuperheroById]);
 
   if (loading) {
     return (
@@ -35,7 +33,7 @@ const SuperheroPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
       <button
         onClick={() => navigate("/")}
         className="btn btn-ghost mb-8 text-lg"
@@ -46,12 +44,60 @@ const SuperheroPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="rounded-lg overflow-hidden shadow-lg bg-base-100">
-          <ImageSlider images={currentSuperhero?.images || []} />
+          <ImageSlider
+            images={currentSuperhero?.images || []}
+            superheroId={currentSuperhero?._id}
+          />
         </div>
 
         <div className="card bg-base-100 shadow-lg">
           <div className="card-body">
-            <h2 className="card-title text-2xl mb-6">Superhero Details:</h2>
+            <h2 className="card-title text-2xl mb-6">Details:</h2>
+
+            <div className="flex flex-col h-full justify-between text-xl">
+              <div className="flex flex-col gap-8">
+                <span className="font-medium">
+                  <span className="text-primary">Nickname: </span>
+                  <span className="font-bold">
+                    {currentSuperhero?.nickname}
+                  </span>
+                </span>
+                <span className="font-medium">
+                  <span className="text-primary">Real name: </span>
+                  <span className="font-bold">
+                    {currentSuperhero?.real_name}
+                  </span>
+                </span>
+                <span className="font-medium">
+                  <span className="text-primary">Origin description: </span>
+                  <span className="font-bold">
+                    {currentSuperhero?.origin_description}
+                  </span>
+                </span>
+                <span className="font-medium">
+                  <span className="text-primary">Superpowers: </span>
+                  <span className="font-bold">
+                    {currentSuperhero?.superpowers}
+                  </span>
+                </span>
+                <span className="font-medium">
+                  <span className="text-primary">Catch phrase: </span>
+                  <span className="font-bold">
+                    {currentSuperhero?.catch_phrase}
+                  </span>
+                </span>
+              </div>
+
+              <button
+                className="btn btn-primary"
+                onClick={() =>
+                  document.getElementById("add_product_modal").showModal()
+                }
+              >
+                <Pencil />
+                Edit
+              </button>
+            </div>
           </div>
         </div>
       </div>

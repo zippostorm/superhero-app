@@ -1,7 +1,7 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 
-const ImageSlider = ({ images }) => {
+const ImageSlider = ({ images, superheroId }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!images || images.length === 0) return null;
@@ -20,13 +20,25 @@ const ImageSlider = ({ images }) => {
     setCurrentIndex(index);
   };
 
+  const handleDelete = async () => {
+    console.log(images[currentIndex].public_id, superheroId);
+  };
+
   return (
-    <div className="relative w-full h-[400px] overflow-hidden rounded-lg shadow-lg bg-base-100">
+    <div className="relative w-full h-[550px] overflow-hidden rounded-lg shadow-lg bg-base-100">
       <img
         src={images[currentIndex]?.secure_url || images[currentIndex]}
         alt={`Slide ${currentIndex + 1}`}
         className="w-full h-full object-cover"
       />
+
+      <button
+        onClick={handleDelete}
+        className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full z-10"
+        title="Delete this image"
+      >
+        <Trash2 className="w-5 h-5" />
+      </button>
 
       {hasMultipleImages && (
         <>
