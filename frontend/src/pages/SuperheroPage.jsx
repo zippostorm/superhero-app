@@ -61,7 +61,7 @@ const SuperheroPage = () => {
             <h2 className="card-title text-2xl mb-4">Details:</h2>
 
             <div className="flex flex-col h-full justify-between text-xl">
-              <div className="flex flex-col gap-12 mb-8">
+              <div className="flex flex-col gap-9 mb-8">
                 <span className="font-medium">
                   <span className="text-primary">Nickname: </span>
                   <span className="font-bold">

@@ -5,12 +5,12 @@ const SuperheroCard = ({ superhero }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+      className="card w-[380px] bg-base-100 shadow-xl hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
       onClick={() => {
         navigate(`/superhero/${superhero._id}`);
       }}
     >
-      <figure className="relative h-[550px] w-[350px]">
+      <figure className="relative h-[550px]">
         <img
           src={superhero?.images[0]?.secure_url}
           alt={superhero.nickname}
