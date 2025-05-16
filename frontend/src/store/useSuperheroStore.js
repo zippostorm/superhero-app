@@ -60,6 +60,22 @@ export const useSuperheroStore = create((set, get) => ({
     }
   },
 
+  deleteSuperhero: async (id) => {
+    set({ loading: true, error: null });
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/superheroes/${id}`
+      );
+      await get().getAllSuperheroes();
+      toast.success("Superhero deleted successfully");
+    } catch (error) {
+      set({ error: error.message });
+      toast.error("Error deleting superhero");
+    } finally {
+      set({ loading: false });
+    }
+  },
+
   getAllSuperheroes: async (searchQuery) => {
     set({ loading: true, error: null });
     try {

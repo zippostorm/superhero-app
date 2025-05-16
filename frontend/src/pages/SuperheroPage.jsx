@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSuperheroStore } from "../store/useSuperheroStore";
-import { ArrowLeftIcon, Pencil } from "lucide-react";
+import { ArrowLeftIcon, Pencil, Trash2 } from "lucide-react";
 
 import ImageSlider from "../components/ImageSlider";
 import EditSuperheroModal from "../components/EditSuperheroModal";
 
 const SuperheroPage = () => {
-  const { getSuperheroById, loading, currentSuperhero, error } =
-    useSuperheroStore();
+  const {
+    getSuperheroById,
+    loading,
+    currentSuperhero,
+    error,
+    deleteSuperhero,
+  } = useSuperheroStore();
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -53,10 +58,10 @@ const SuperheroPage = () => {
 
         <div className="card bg-base-100 shadow-lg">
           <div className="card-body">
-            <h2 className="card-title text-2xl mb-6">Details:</h2>
+            <h2 className="card-title text-2xl mb-4">Details:</h2>
 
             <div className="flex flex-col h-full justify-between text-xl">
-              <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-8 mb-8">
                 <span className="font-medium">
                   <span className="text-primary">Nickname: </span>
                   <span className="font-bold">
@@ -99,6 +104,18 @@ const SuperheroPage = () => {
                 Edit
               </button>
               <EditSuperheroModal />
+              <button
+                className="btn btn-error"
+                onClick={() => {
+                  deleteSuperhero(currentSuperhero._id);
+                  setTimeout(() => {
+                    navigate("/");
+                  }, 1000);
+                }}
+              >
+                <Trash2 />
+                Delete
+              </button>
             </div>
           </div>
         </div>

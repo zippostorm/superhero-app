@@ -170,7 +170,8 @@ export const deleteSuperhero = async (req, res) => {
       }
     }
 
-    await superhero.remove();
+    await Superhero.findByIdAndDelete(req.params.id);
+
     res.status(200).json({ success: true, message: "Superhero deleted" });
   } catch (error) {
     res.status(500).json({
