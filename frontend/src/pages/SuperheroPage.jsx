@@ -4,6 +4,7 @@ import { useSuperheroStore } from "../store/useSuperheroStore";
 import { ArrowLeftIcon, Pencil } from "lucide-react";
 
 import ImageSlider from "../components/ImageSlider";
+import EditSuperheroModal from "../components/EditSuperheroModal";
 
 const SuperheroPage = () => {
   const { getSuperheroById, loading, currentSuperhero, error } =
@@ -91,12 +92,13 @@ const SuperheroPage = () => {
               <button
                 className="btn btn-primary"
                 onClick={() =>
-                  document.getElementById("add_product_modal").showModal()
+                  document.getElementById("edit_superhero_modal").showModal()
                 }
               >
                 <Pencil />
                 Edit
               </button>
+              <EditSuperheroModal />
             </div>
           </div>
         </div>

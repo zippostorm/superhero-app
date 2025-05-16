@@ -67,11 +67,11 @@ const AddSuperheroModal = () => {
     resetFormData();
   };
   return (
-    <dialog id="add_product_modal" className="modal">
+    <dialog id="add_superhero_modal" className="modal">
       <div className="modal-box">
         <button
           className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-          onClick={() => document.getElementById("add_product_modal").close()}
+          onClick={() => document.getElementById("add_superhero_modal").close()}
         >
           X
         </button>
@@ -221,7 +221,7 @@ const AddSuperheroModal = () => {
               type="button"
               className="btn btn-ghost"
               onClick={() => {
-                document.getElementById("add_product_modal").close();
+                document.getElementById("add_superhero_modal").close();
                 resetFormData();
               }}
             >

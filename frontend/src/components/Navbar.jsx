@@ -27,7 +27,7 @@ const Navbar = () => {
             <button
               className="btn btn-primary"
               onClick={() =>
-                document.getElementById("add_product_modal").showModal()
+                document.getElementById("add_superhero_modal").showModal()
               }
             >
               <PlusCircleIcon className="size-5 mr-2" />

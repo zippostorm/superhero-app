@@ -17,7 +17,7 @@ export const useSuperheroStore = create((set, get) => ({
       );
       await get().getAllSuperheroes();
       toast.success("Superhero added successfully");
-      document.getElementById("add_product_modal").close();
+      document.getElementById("add_superhero_modal").close();
     } catch (error) {
       set({ error: error.message });
       toast.error("Error adding superhero");
