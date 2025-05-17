@@ -54,9 +54,9 @@ The command npm run develop sets up both backend and frontend by installing all 
 
 The application requires a .env file with environment variables like MONGODB_URI, PORT, etc.
 
-MongoDB (or the relevant database) is already running and accessible.
+MongoDB is already running and accessible.
 
-npm run dev will concurrently start both backend and frontend development servers.
+To run both the backend and frontend development servers, you need to execute npm run dev separately in each part of the project.
 
 <h1>Unit Tests Report</h1>
 
